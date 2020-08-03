@@ -20,9 +20,10 @@ public class MainMenu implements ActionListener {
 	JFrame MenuFrame = globalVars.MAIN_FRAME;
 	
 	public MainMenu() {
+		
 		MenuPanel = new JPanel();
-		StartButton = new JButton("Start Game");
 		ExitButton = new JButton("Exit Game");
+		StartButton = new JButton("Start Game");
 		TitleText = new JLabel("Cookie Clicker");
 		StartButton.addActionListener(this);
 		ExitButton.addActionListener(this);
