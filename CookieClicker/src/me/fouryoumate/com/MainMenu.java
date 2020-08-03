@@ -23,8 +23,8 @@ public class MainMenu implements ActionListener {
 		
 		MenuPanel = new JPanel();
 		ExitButton = new JButton("Exit Game");
-		StartButton = new JButton("Start Game");
 		TitleText = new JLabel("Cookie Clicker");
+		StartButton = new JButton("Start Game");
 		StartButton.addActionListener(this);
 		ExitButton.addActionListener(this);
 		
