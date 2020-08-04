@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -17,7 +19,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class GameGui implements ActionListener, ChangeListener {
+public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	
 	JPanel gamePanel;
 	JButton cookieButton;
@@ -62,9 +64,11 @@ public class GameGui implements ActionListener, ChangeListener {
 		
 		frame.setJMenuBar(menuBar);
 		gamePanel = new JPanel();
+		cookieButton.addKeyListener(this);
 		volume.setMinimum(-50);
 		
 		volume.setMaximum(1);
+		
 		gamePanel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
 		gamePanel.setLayout(new GridLayout(3,0));
 		gamePanel.setPreferredSize(new Dimension(260, 200));
@@ -87,6 +91,13 @@ public class GameGui implements ActionListener, ChangeListener {
 			cookies += globalVars.cps();
 			SoundManager.effectSounds("sounds/effects/Pling.wav");
 			COOKIES_LABEL.setText("Cookies: "+cookies);
+		}else if(event.getSource() == shopButton) {
+			globalVars.COOKIE_MULTIPLIER = multi;
+			globalVars.COOKIES = cookies;
+			globalVars.VOLUME = (float) volume.getValue();
+			SoundManager.effectSounds("sounds/effects/Pling.wav");
+			mainFrame.remove(gamePanel);
+			new ShopGui();
 		}
 	}
 
@@ -96,5 +107,25 @@ public class GameGui implements ActionListener, ChangeListener {
 			globalVars.VOLUME = (float) volume.getValue();
 			
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(event.getKeyCode() == KeyEvent.VK_A) {
+			System.out.println("Test");
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
