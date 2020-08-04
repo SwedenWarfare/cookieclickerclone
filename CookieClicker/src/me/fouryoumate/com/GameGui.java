@@ -129,7 +129,9 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 					}catch(InterruptedException e) {
 						e.printStackTrace();
 					}
+					globalVars.VOLUME = -50f;
 					cookieButton.doClick();
+					
 				}
 			}else {
 				return;
@@ -138,9 +140,11 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent event) {
 		// TODO Auto-generated method stub
-		
+		if(event.getKeyCode() == KeyEvent.VK_A) {
+			globalVars.VOLUME = (float) volume.getValue();
+		}
 	}
 
 	@Override
