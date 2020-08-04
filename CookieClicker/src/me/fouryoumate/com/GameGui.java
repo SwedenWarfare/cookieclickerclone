@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -32,9 +33,9 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	JMenu optionsMenu;
 	JMenu saveMenu;
 	JMenu soundMenu;
-	
+	JMenu statsMenu;
 	static JLabel volumeLabel = new JLabel("Volume: ");
-	
+	static JLabel MULTIPLIER_LABEL = new JLabel();
 	public JFrame mainFrame = globalVars.MAIN_FRAME;
 	
 	int cookies = globalVars.COOKIES;
@@ -45,6 +46,9 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 		optionsMenu = new JMenu("Options");
 		saveMenu = new JMenu("Save / Load");
 		soundMenu = new JMenu("Sound");
+		statsMenu = new JMenu("Stats");
+		MULTIPLIER_LABEL.setText("Multiplier: "+multi);
+		statsMenu.add(MULTIPLIER_LABEL);
 		volume = new JSlider();
 		volume.addChangeListener(this);
 		
@@ -52,6 +56,7 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 		soundMenu.add(volume);
 		menuBar.add(optionsMenu);
 		menuBar.add(saveMenu);
+		menuBar.add(statsMenu);
 		optionsMenu.add(soundMenu);
 		
 		cookieButton = new JButton("Cookies");
@@ -113,7 +118,22 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	public void keyPressed(KeyEvent event) {
 		// TODO Auto-generated method stub
 		if(event.getKeyCode() == KeyEvent.VK_A) {
-			System.out.println("Test");
+			if(globalVars.AUTO_CLICKER_LEVEL == 1) {
+				if(globalVars.AUTO_CLICKER_TOGGLE) {
+					globalVars.AUTO_CLICKER_TOGGLE = !globalVars.AUTO_CLICKER_TOGGLE;
+				}
+				else {
+					globalVars.AUTO_CLICKER_TOGGLE = !globalVars.AUTO_CLICKER_TOGGLE;
+					try {
+						Thread.sleep(20);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+					cookieButton.doClick();
+				}
+			}else {
+				return;
+			}
 		}
 	}
 

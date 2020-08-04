@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class ShopGui implements ActionListener {
 	JPanel shopPanel;
 	JButton buyMulti = new JButton("Buy multi >> Price: "+globalVars.COOKIE_MULTIPLIER_PRICE);
-	
+	JButton buyAutoClicker = new JButton("Buy Clicker >> Price: " +globalVars.AUTO_CLICKER_PRICE);
 	JLabel notEnoughCookies = new JLabel("");
 	JLabel shopText;
 	
@@ -30,14 +30,17 @@ public class ShopGui implements ActionListener {
 		
 		buyMulti.addActionListener(this);
 		backButton.addActionListener(this);
-		
+		buyAutoClicker.addActionListener(this);
 		
 		shopPanel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
-		shopPanel.setLayout(new GridLayout(4,0));
+		shopPanel.setLayout(new GridLayout(5,0));
 		shopPanel.setPreferredSize(new Dimension(250, 250));
 		
 		shopPanel.add(notEnoughCookies);
 		shopPanel.add(buyMulti);
+		if(globalVars.AUTO_CLICKER_LEVEL == 0)
+		shopPanel.add(buyAutoClicker);
+		
 		shopPanel.add(backButton);
 
 		mainFrame.setTitle("Shop");
@@ -60,8 +63,19 @@ public class ShopGui implements ActionListener {
 				buyMulti.setText("Buy multi >> Price: "+globalVars.COOKIE_MULTIPLIER_PRICE);
 				GameGui.COOKIES_LABEL.setText( "Cookies: "+globalVars.COOKIES);
 				globalVars.COOKIE_MULTIPLIER++; 
-			}else {
+			}
+			else {
 				notEnoughCookies.setText("You need: "+globalVars.COOKIE_MULTIPLIER_PRICE+" cookies");
+			
+			}
+		}else if(event.getSource() == buyAutoClicker) {
+			if(globalVars.COOKIES >= globalVars.AUTO_CLICKER_PRICE) {
+				globalVars.COOKIES -= globalVars.AUTO_CLICKER_PRICE;
+				GameGui.COOKIES_LABEL.setText( "Cookies: "+globalVars.COOKIES);
+				globalVars.AUTO_CLICKER_LEVEL = 1;
+			}
+			else {
+				notEnoughCookies.setText("You need: "+globalVars.AUTO_CLICKER_PRICE+" cookies");
 			
 			}
 		}
