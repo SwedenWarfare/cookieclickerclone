@@ -17,7 +17,7 @@ public class MainMenu implements ActionListener {
 	JButton ExitButton;
 	JLabel TitleText;
 	JPanel MenuPanel;
-	JFrame MenuFrame = globalVars.MAIN_FRAME;
+	JFrame MenuFrame = GlobalVars.MAIN_FRAME;
 	
 	public MainMenu() {
 		

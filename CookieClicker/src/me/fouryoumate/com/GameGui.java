@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -23,9 +22,9 @@ import javax.swing.event.ChangeListener;
 public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	
 	JPanel gamePanel;
-	JButton cookieButton;
+	public static JButton cookieButton;
 	JButton shopButton;
-	
+	public AutoClicker AutoClicker = new AutoClicker();
 	static JLabel COOKIES_LABEL = new JLabel();
 	
 	JSlider volume;
@@ -36,10 +35,10 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	JMenu statsMenu;
 	static JLabel volumeLabel = new JLabel("Volume: ");
 	static JLabel MULTIPLIER_LABEL = new JLabel();
-	public JFrame mainFrame = globalVars.MAIN_FRAME;
+	public JFrame mainFrame = GlobalVars.MAIN_FRAME;
 	
-	int cookies = globalVars.COOKIES;
-	int multi = globalVars.COOKIE_MULTIPLIER;
+	int cookies = GlobalVars.COOKIES;
+	int multi = GlobalVars.COOKIE_MULTIPLIER;
 	
 	public GameGui(JFrame frame) {
 		menuBar = new JMenuBar();
@@ -93,14 +92,15 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	public void actionPerformed(ActionEvent event) {
 		
 		if(event.getSource() == cookieButton) {
-			cookies += globalVars.cps();
+			cookies += GlobalVars.cps();
 			SoundManager.effectSounds("sounds/effects/Pling.wav");
 			COOKIES_LABEL.setText("Cookies: "+cookies);
 		}else if(event.getSource() == shopButton) {
-			globalVars.COOKIE_MULTIPLIER = multi;
-			globalVars.COOKIES = cookies;
-			globalVars.VOLUME = (float) volume.getValue();
+			GlobalVars.COOKIE_MULTIPLIER = multi;
+			GlobalVars.COOKIES = cookies;
+			GlobalVars.VOLUME = (float) volume.getValue();
 			SoundManager.effectSounds("sounds/effects/Pling.wav");
+			AutoClicker.toggleAuto();
 			mainFrame.remove(gamePanel);
 			new ShopGui();
 		}
@@ -109,7 +109,7 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	@Override
 	public void stateChanged(ChangeEvent changeEvent) {
 		if(changeEvent.getSource() == volume) {
-			globalVars.VOLUME = (float) volume.getValue();
+			GlobalVars.VOLUME = (float) volume.getValue();
 			
 		}
 	}
@@ -117,20 +117,17 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent event) {
 		// TODO Auto-generated method stub
+		Thread thread = new Thread(AutoClicker);
 		if(event.getKeyCode() == KeyEvent.VK_A) {
-			if(globalVars.AUTO_CLICKER_LEVEL == 1) {
-				if(globalVars.AUTO_CLICKER_TOGGLE) {
-					globalVars.AUTO_CLICKER_TOGGLE = !globalVars.AUTO_CLICKER_TOGGLE;
+			if(GlobalVars.AUTO_CLICKER_LEVEL == 1) {
+				if(GlobalVars.AUTO_CLICKER_TOGGLE) {
+					GlobalVars.AUTO_CLICKER_TOGGLE = !GlobalVars.AUTO_CLICKER_TOGGLE;
+					AutoClicker.toggleAuto();
 				}
 				else {
-					globalVars.AUTO_CLICKER_TOGGLE = !globalVars.AUTO_CLICKER_TOGGLE;
-					try {
-						Thread.sleep(20);
-					}catch(InterruptedException e) {
-						e.printStackTrace();
-					}
-					globalVars.VOLUME = -50f;
-					cookieButton.doClick();
+					GlobalVars.AUTO_CLICKER_TOGGLE = !GlobalVars.AUTO_CLICKER_TOGGLE;
+					thread.start();
+					GlobalVars.VOLUME = -50f;
 					
 				}
 			}else {
@@ -143,7 +140,7 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	public void keyReleased(KeyEvent event) {
 		// TODO Auto-generated method stub
 		if(event.getKeyCode() == KeyEvent.VK_A) {
-			globalVars.VOLUME = (float) volume.getValue();
+			GlobalVars.VOLUME = (float) volume.getValue();
 		}
 	}
 

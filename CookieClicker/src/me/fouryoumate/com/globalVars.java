@@ -2,10 +2,10 @@ package me.fouryoumate.com;
 
 import javax.swing.JFrame;
 
-public class globalVars {
+public class GlobalVars {
 
 	public static JFrame MAIN_FRAME = new JFrame();
-	public static int COOKIES = 0;
+	public static int COOKIES = 50;
 	public static int COOKIE_MULTIPLIER = 1;
 	public static int COOKIE_MULTIPLIER_PRICE = 25;
 	public static int AUTO_CLICKER_PRICE = 50;

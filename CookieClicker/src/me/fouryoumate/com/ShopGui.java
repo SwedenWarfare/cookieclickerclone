@@ -16,15 +16,15 @@ import javax.swing.JPanel;
 
 public class ShopGui implements ActionListener {
 	JPanel shopPanel;
-	JButton buyMulti = new JButton("Buy multi >> Price: "+globalVars.COOKIE_MULTIPLIER_PRICE);
-	JButton buyAutoClicker = new JButton("Buy Clicker >> Price: " +globalVars.AUTO_CLICKER_PRICE);
+	JButton buyMulti = new JButton("Buy multi >> Price: "+GlobalVars.COOKIE_MULTIPLIER_PRICE);
+	JButton buyAutoClicker = new JButton("Buy Clicker >> Price: " +GlobalVars.AUTO_CLICKER_PRICE);
 	JLabel notEnoughCookies = new JLabel("");
 	JLabel shopText;
  	JButton okButton = new JButton("Ok");
 	JButton backButton;
 	JOptionPane infoPane = new JOptionPane("When you have bought the autoclicker\nPress the cookie button once\nThen hold the A button",JOptionPane.WARNING_MESSAGE);
 	JDialog infoDialog = infoPane.createDialog("Info");
-	public JFrame mainFrame = globalVars.MAIN_FRAME;
+	public JFrame mainFrame = GlobalVars.MAIN_FRAME;
 	public ShopGui() {
 		shopPanel = new JPanel();
 		backButton = new JButton("Back");
@@ -42,7 +42,7 @@ public class ShopGui implements ActionListener {
 		shopPanel.add(notEnoughCookies);
 		
 		shopPanel.add(buyMulti);
-		if(globalVars.AUTO_CLICKER_LEVEL == 0)
+		if(GlobalVars.AUTO_CLICKER_LEVEL == 0)
 		shopPanel.add(buyAutoClicker);
 		
 		
@@ -61,30 +61,30 @@ public class ShopGui implements ActionListener {
 			
 			new GameGui(mainFrame);
 		}else if(event.getSource() == buyMulti) {
-			if(globalVars.COOKIES >= globalVars.COOKIE_MULTIPLIER_PRICE) {
-				globalVars.COOKIES -= globalVars.COOKIE_MULTIPLIER_PRICE;
-				globalVars.COOKIE_MULTIPLIER_PRICE *= 1.5;
+			if(GlobalVars.COOKIES >= GlobalVars.COOKIE_MULTIPLIER_PRICE) {
+				GlobalVars.COOKIES -= GlobalVars.COOKIE_MULTIPLIER_PRICE;
+				GlobalVars.COOKIE_MULTIPLIER_PRICE *= 1.5;
 				
 			
-				buyMulti.setText("Buy multi >> Price: "+globalVars.COOKIE_MULTIPLIER_PRICE);
-				GameGui.COOKIES_LABEL.setText( "Cookies: "+globalVars.COOKIES);
-				globalVars.COOKIE_MULTIPLIER++; 
+				buyMulti.setText("Buy multi >> Price: "+GlobalVars.COOKIE_MULTIPLIER_PRICE);
+				GameGui.COOKIES_LABEL.setText( "Cookies: "+GlobalVars.COOKIES);
+				GlobalVars.COOKIE_MULTIPLIER++; 
 			}
 			else {
-				notEnoughCookies.setText("You need: "+globalVars.COOKIE_MULTIPLIER_PRICE+" cookies");
+				notEnoughCookies.setText("You need: "+GlobalVars.COOKIE_MULTIPLIER_PRICE+" cookies");
 				
 			}
 		}else if(event.getSource() == buyAutoClicker) {
-			if(globalVars.COOKIES >= globalVars.AUTO_CLICKER_PRICE) {
-				globalVars.COOKIES -= globalVars.AUTO_CLICKER_PRICE;
-				GameGui.COOKIES_LABEL.setText( "Cookies: "+globalVars.COOKIES);
-				globalVars.AUTO_CLICKER_LEVEL = 1;
+			if(GlobalVars.COOKIES >= GlobalVars.AUTO_CLICKER_PRICE) {
+				GlobalVars.COOKIES -= GlobalVars.AUTO_CLICKER_PRICE;
+				GameGui.COOKIES_LABEL.setText( "Cookies: "+GlobalVars.COOKIES);
+				GlobalVars.AUTO_CLICKER_LEVEL = 1;
 
 				infoDialog.setAlwaysOnTop(true);
 				infoDialog.setVisible(true);
 			}
 			else {
-				notEnoughCookies.setText("You need: "+globalVars.AUTO_CLICKER_PRICE+" cookies");
+				notEnoughCookies.setText("You need: "+GlobalVars.AUTO_CLICKER_PRICE+" cookies");
 			
 			}
 		}
