@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 public class GlobalVars {
 
 	public static JFrame MAIN_FRAME = new JFrame();
-	public static int COOKIES = 50;
+	private static int COOKIES = 50;
 	public static int COOKIE_MULTIPLIER = 1;
 	public static int COOKIE_MULTIPLIER_PRICE = 25;
 	public static int AUTO_CLICKER_PRICE = 50;
@@ -13,6 +13,12 @@ public class GlobalVars {
 	public static boolean AUTO_CLICKER_TOGGLE = false;
 	
 	public static float VOLUME = 1;
+	public static void setCookies(int amount) {
+		COOKIES -= amount;
+	}
+	public static int getCookies() {
+		return COOKIES;
+	}
 	public static int cps() {
 		return 1*COOKIE_MULTIPLIER;
 	}

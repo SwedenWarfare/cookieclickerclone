@@ -61,13 +61,13 @@ public class ShopGui implements ActionListener {
 			
 			new GameGui(mainFrame);
 		}else if(event.getSource() == buyMulti) {
-			if(GlobalVars.COOKIES >= GlobalVars.COOKIE_MULTIPLIER_PRICE) {
-				GlobalVars.COOKIES -= GlobalVars.COOKIE_MULTIPLIER_PRICE;
+			if(GlobalVars.getCookies() >= GlobalVars.COOKIE_MULTIPLIER_PRICE) {
+				GlobalVars.setCookies(GlobalVars.COOKIE_MULTIPLIER_PRICE);
 				GlobalVars.COOKIE_MULTIPLIER_PRICE *= 1.5;
 				
 			
 				buyMulti.setText("Buy multi >> Price: "+GlobalVars.COOKIE_MULTIPLIER_PRICE);
-				GameGui.COOKIES_LABEL.setText( "Cookies: "+GlobalVars.COOKIES);
+				GameGui.COOKIES_LABEL.setText( "Cookies: "+GlobalVars.getCookies());
 				GlobalVars.COOKIE_MULTIPLIER++; 
 			}
 			else {
@@ -75,9 +75,9 @@ public class ShopGui implements ActionListener {
 				
 			}
 		}else if(event.getSource() == buyAutoClicker) {
-			if(GlobalVars.COOKIES >= GlobalVars.AUTO_CLICKER_PRICE) {
-				GlobalVars.COOKIES -= GlobalVars.AUTO_CLICKER_PRICE;
-				GameGui.COOKIES_LABEL.setText( "Cookies: "+GlobalVars.COOKIES);
+			if(GlobalVars.getCookies() >= GlobalVars.AUTO_CLICKER_PRICE) {
+				GlobalVars.setCookies(GlobalVars.AUTO_CLICKER_PRICE);
+				GameGui.COOKIES_LABEL.setText( "Cookies: "+GlobalVars.getCookies());
 				GlobalVars.AUTO_CLICKER_LEVEL = 1;
 
 				infoDialog.setAlwaysOnTop(true);
