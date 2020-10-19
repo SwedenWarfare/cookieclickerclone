@@ -38,8 +38,8 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	static JLabel MULTIPLIER_LABEL = new JLabel();
 	public JFrame mainFrame = GlobalVars.MAIN_FRAME;
 	
-	int cookies = GlobalVars.COOKIES;
-	int multi = GlobalVars.COOKIE_MULTIPLIER;
+	int cookies = GlobalVars.getCookies();
+	int multi = GlobalVars.getCookieMulti();
 	
 	public GameGui(JFrame frame) {
 		menuBar = new JMenuBar();
@@ -97,8 +97,8 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 			SoundManager.effectSounds("sounds/effects/Pling.wav");
 			COOKIES_LABEL.setText("Cookies: "+cookies);
 		}else if(event.getSource() == shopButton) {
-			GlobalVars.COOKIE_MULTIPLIER = multi;
-			GlobalVars.COOKIES = cookies;
+			GlobalVars.setCookieMulti(multi) ;
+			GlobalVars.setCookies(cookies);
 			GlobalVars.VOLUME = (float) volume.getValue();
 			SoundManager.effectSounds("sounds/effects/Pling.wav");
 			AutoClicker.toggleAuto();
