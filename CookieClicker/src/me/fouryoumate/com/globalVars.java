@@ -8,8 +8,8 @@ public class globalVars {
 	private static int COOKIES = 50;
 	private static int COOKIE_MULTIPLIER = 1;
 	private static int COOKIE_MULTIPLIER_PRICE = 25;
-	public static int AUTO_CLICKER_PRICE = 50;
-	public static int AUTO_CLICKER_LEVEL = 0;
+	private static int AUTO_CLICKER_PRICE = 50;
+	private static int AUTO_CLICKER_LEVEL = 0;
 	public static boolean AUTO_CLICKER_TOGGLE = false;
 	
 	public static float VOLUME = 1;
