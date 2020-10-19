@@ -17,7 +17,7 @@ public class SoundManager {
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioIn);
 			FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			control.setValue(GlobalVars.VOLUME);
+			control.setValue(globalVars.VOLUME);
 			clip.start();
 		}catch (Exception e) {
 			e.printStackTrace();

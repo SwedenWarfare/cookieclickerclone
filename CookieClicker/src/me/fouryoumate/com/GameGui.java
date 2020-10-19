@@ -93,7 +93,7 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	public void actionPerformed(ActionEvent event) {
 		
 		if(event.getSource() == cookieButton) {
-			cookies += GlobalVars.cps();
+			cookies += globalVars.cps();
 			SoundManager.effectSounds("sounds/effects/Pling.wav");
 			COOKIES_LABEL.setText("Cookies: "+cookies);
 		}else if(event.getSource() == shopButton) {
@@ -122,7 +122,7 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 		if(event.getKeyCode() == KeyEvent.VK_B)
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		if(event.getKeyCode() == KeyEvent.VK_A) {
-			if(globalVars.AUTO_CLICKER_LEVEL == 1) {
+			if(globalVars.getAutoLevel() == 1) {
 				if(globalVars.AUTO_CLICKER_TOGGLE) {
 					globalVars.AUTO_CLICKER_TOGGLE = !globalVars.AUTO_CLICKER_TOGGLE;
 					AutoClicker.toggleAuto();
