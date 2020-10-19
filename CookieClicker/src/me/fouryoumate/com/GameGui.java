@@ -36,10 +36,10 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	JMenu statsMenu;
 	static JLabel volumeLabel = new JLabel("Volume: ");
 	static JLabel MULTIPLIER_LABEL = new JLabel();
-	public JFrame mainFrame = GlobalVars.MAIN_FRAME;
+	public JFrame mainFrame = globalVars.MAIN_FRAME;
 	
-	int cookies = GlobalVars.getCookies();
-	int multi = GlobalVars.getCookieMulti();
+	int cookies = globalVars.getCookies();
+	int multi = globalVars.getCookieMulti();
 	
 	public GameGui(JFrame frame) {
 		menuBar = new JMenuBar();
@@ -97,9 +97,9 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 			SoundManager.effectSounds("sounds/effects/Pling.wav");
 			COOKIES_LABEL.setText("Cookies: "+cookies);
 		}else if(event.getSource() == shopButton) {
-			GlobalVars.setCookieMulti(multi) ;
-			GlobalVars.setCookies(cookies);
-			GlobalVars.VOLUME = (float) volume.getValue();
+			globalVars.setCookieMulti(multi) ;
+			globalVars.setCookies(cookies);
+			globalVars.VOLUME = (float) volume.getValue();
 			SoundManager.effectSounds("sounds/effects/Pling.wav");
 			AutoClicker.toggleAuto();
 			mainFrame.remove(gamePanel);
@@ -110,7 +110,7 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	@Override
 	public void stateChanged(ChangeEvent changeEvent) {
 		if(changeEvent.getSource() == volume) {
-			GlobalVars.VOLUME = (float) volume.getValue();
+			globalVars.VOLUME = (float) volume.getValue();
 			
 		}
 	}
@@ -122,15 +122,15 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 		if(event.getKeyCode() == KeyEvent.VK_B)
 			mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		if(event.getKeyCode() == KeyEvent.VK_A) {
-			if(GlobalVars.AUTO_CLICKER_LEVEL == 1) {
-				if(GlobalVars.AUTO_CLICKER_TOGGLE) {
-					GlobalVars.AUTO_CLICKER_TOGGLE = !GlobalVars.AUTO_CLICKER_TOGGLE;
+			if(globalVars.AUTO_CLICKER_LEVEL == 1) {
+				if(globalVars.AUTO_CLICKER_TOGGLE) {
+					globalVars.AUTO_CLICKER_TOGGLE = !globalVars.AUTO_CLICKER_TOGGLE;
 					AutoClicker.toggleAuto();
 				}
 				else {
-					GlobalVars.AUTO_CLICKER_TOGGLE = !GlobalVars.AUTO_CLICKER_TOGGLE;
+					globalVars.AUTO_CLICKER_TOGGLE = !globalVars.AUTO_CLICKER_TOGGLE;
 					thread.start();
-					GlobalVars.VOLUME = -50f;
+					globalVars.VOLUME = -50f;
 					
 				}
 			}else {
@@ -147,7 +147,7 @@ public class GameGui implements ActionListener, ChangeListener, KeyListener {
 	public void keyReleased(KeyEvent event) {
 		// TODO Auto-generated method stub
 		if(event.getKeyCode() == KeyEvent.VK_A) {
-			GlobalVars.VOLUME = (float) volume.getValue();
+			globalVars.VOLUME = (float) volume.getValue();
 		}
 	}
 
